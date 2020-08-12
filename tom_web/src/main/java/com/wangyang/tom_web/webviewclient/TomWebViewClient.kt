@@ -5,6 +5,7 @@ import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.wangyang.tom_web.WebViewClientCallBack
 
 class TomWebViewClient(private val  webViewClientCallBack: WebViewClientCallBack) : WebViewClient() {
 
@@ -34,15 +35,3 @@ class TomWebViewClient(private val  webViewClientCallBack: WebViewClientCallBack
 
 }
 
-interface WebViewClientCallBack {
-
-    fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?)
-
-    fun onPageFinished(view: WebView?, url: String?)
-
-    fun onReceivedError(
-        view: WebView?,
-        request: WebResourceRequest?,
-        error: WebResourceError?
-    )
-}

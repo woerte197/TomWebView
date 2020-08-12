@@ -16,17 +16,15 @@ import com.wangyang.loadsir.callback.LoadingCallback
 import com.wangyang.loadsir.callback.SuccessCallback
 import com.wangyang.loadsir.core.LoadService
 import com.wangyang.loadsir.core.LoadSir
-import com.wangyang.tom_web.webchromeclient.TomWebChromeCallBack
 import com.wangyang.tom_web.webchromeclient.TomWebChromeClient
 import com.wangyang.tom_web.webviewclient.TomWebViewClient
-import com.wangyang.tom_web.webviewclient.WebViewClientCallBack
 import kotlinx.android.synthetic.main.fragment_web_view.*
 
 
 /**
  * WebViewFragment
  */
-class WebViewFragment : Fragment(), WebViewClientCallBack, TomWebChromeCallBack,
+class WebViewFragment : Fragment(), WebViewClientCallBack,
     Callback.OnReloadListener {
     private var mUrl: String? = null
     private var mLoadService: LoadService<*>? = null
