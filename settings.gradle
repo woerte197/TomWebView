@@ -1,0 +1,3 @@
+include ':loadsir'
+include ':app', ':base', ':tom_web', ':router'
+rootProject.name='TomWebView'
