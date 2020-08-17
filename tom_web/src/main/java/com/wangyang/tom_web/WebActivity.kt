@@ -13,7 +13,7 @@ class WebActivity : AppCompatActivity() {
         webViewFragment =
             WebViewFragment.newInstance(intent.getStringExtra(WebViewConstant.WEB_URL) ?: "")
         supportFragmentManager.beginTransaction().replace(
-            R.id.fm_web, webViewFragment!!
+                R.id.fm_web, webViewFragment!!
         ).commit()
 
         web_back.setOnClickListener {

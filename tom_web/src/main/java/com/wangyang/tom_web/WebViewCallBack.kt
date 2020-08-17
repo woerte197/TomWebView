@@ -1,11 +1,12 @@
 package com.wangyang.tom_web
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 
-interface WebViewClientCallBack {
+interface WebViewCallBack {
 
     fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?)
 
@@ -17,4 +18,10 @@ interface WebViewClientCallBack {
         error: WebResourceError?
     )
     fun onReceivedTitle(view: WebView?, title: String?)
+    fun exec(
+        context: Context?,
+        commandBean: CommandBean,
+        webView: WebView?
+    )
+
 }

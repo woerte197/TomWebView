@@ -1,5 +1,6 @@
 package com.wangyang.tom_web
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,19 +17,28 @@ import com.wangyang.loadsir.callback.LoadingCallback
 import com.wangyang.loadsir.callback.SuccessCallback
 import com.wangyang.loadsir.core.LoadService
 import com.wangyang.loadsir.core.LoadSir
-import com.wangyang.tom_web.webchromeclient.TomWebChromeClient
-import com.wangyang.tom_web.webviewclient.TomWebViewClient
 import kotlinx.android.synthetic.main.fragment_web_view.*
 
 
 /**
  * WebViewFragment
  */
-class WebViewFragment : Fragment(), WebViewClientCallBack,
+class WebViewFragment : Fragment(), WebViewCallBack,
     Callback.OnReloadListener {
     private var mUrl: String? = null
     private var mLoadService: LoadService<*>? = null
     private var mError: Boolean = false
+
+    companion object {
+        @JvmStatic
+        fun newInstance(url: String) =
+            WebViewFragment().apply {
+                arguments = Bundle().apply {
+                    putString(WebViewConstant.WEB_URL, url)
+                }
+            }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +46,7 @@ class WebViewFragment : Fragment(), WebViewClientCallBack,
             mUrl = it.getString(WebViewConstant.WEB_URL)
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,20 +63,8 @@ class WebViewFragment : Fragment(), WebViewClientCallBack,
     }
 
     private fun initView() {
-        webView.settings.javaScriptEnabled = true
-        webView.webViewClient = TomWebViewClient(this)
-        webView.webChromeClient = TomWebChromeClient(this)
-        webView.loadUrl(mUrl)
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(url: String) =
-            WebViewFragment().apply {
-                arguments = Bundle().apply {
-                    putString(WebViewConstant.WEB_URL, url)
-                }
-            }
+        webView.webViewCallBack = this
+        webView.loadUrl("file:///android_asset/aidl.html")
     }
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
@@ -97,6 +96,9 @@ class WebViewFragment : Fragment(), WebViewClientCallBack,
         if (activity is WebActivity) {
             (activity as WebActivity).updateTitle(title ?: "")
         }
+    }
+
+    override fun exec(context: Context?, commandBean: CommandBean, webView: WebView?) {
     }
 
     fun back(over: () -> Unit) {

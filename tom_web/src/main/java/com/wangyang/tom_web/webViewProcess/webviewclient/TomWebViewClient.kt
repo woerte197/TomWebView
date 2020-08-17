@@ -1,13 +1,13 @@
-package com.wangyang.tom_web.webviewclient
+package com.wangyang.tom_web.webViewProcess.webviewclient
 
 import android.graphics.Bitmap
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.wangyang.tom_web.WebViewClientCallBack
+import com.wangyang.tom_web.WebViewCallBack
 
-class TomWebViewClient(private val  webViewClientCallBack: WebViewClientCallBack) : WebViewClient() {
+class TomWebViewClient(private val  webViewCallBack: WebViewCallBack?) : WebViewClient() {
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
         return super.shouldOverrideUrlLoading(view, request)
@@ -15,13 +15,13 @@ class TomWebViewClient(private val  webViewClientCallBack: WebViewClientCallBack
 
     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
         super.onPageStarted(view, url, favicon)
-        webViewClientCallBack.onPageStarted(view, url, favicon)
+        webViewCallBack?.onPageStarted(view, url, favicon)
     }
 
 
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
-        webViewClientCallBack.onPageFinished(view, url)
+        webViewCallBack?.onPageFinished(view, url)
     }
 
     override fun onReceivedError(
@@ -30,7 +30,7 @@ class TomWebViewClient(private val  webViewClientCallBack: WebViewClientCallBack
         error: WebResourceError?
     ) {
         super.onReceivedError(view, request, error)
-        webViewClientCallBack.onReceivedError(view, request, error)
+        webViewCallBack?.onReceivedError(view, request, error)
     }
 
 }

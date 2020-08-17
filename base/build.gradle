@@ -33,4 +33,6 @@ dependencies {
     api "androidx.constraintlayout:constraintlayout:${rootProject.ext.dependencies["constraintlayout-x"]}"
     api 'com.google.auto.service:auto-service:1.0-rc7'
     api project(path: ':loadsir')
+    api 'com.google.code.gson:gson:2.8.6'
+
 }
