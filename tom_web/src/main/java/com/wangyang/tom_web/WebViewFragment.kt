@@ -17,6 +17,7 @@ import com.wangyang.loadsir.callback.LoadingCallback
 import com.wangyang.loadsir.callback.SuccessCallback
 import com.wangyang.loadsir.core.LoadService
 import com.wangyang.loadsir.core.LoadSir
+import com.wangyang.tom_web.webviewprocess.WebViewProcessCommandDispatcher
 import kotlinx.android.synthetic.main.fragment_web_view.*
 
 
@@ -98,7 +99,8 @@ class WebViewFragment : Fragment(), WebViewCallBack,
         }
     }
 
-    override fun exec(context: Context?, commandBean: CommandBean, webView: WebView?) {
+    override fun exec(context: Context?, commandBean: CommandBean, webView: TomWebView?) {
+       WebViewProcessCommandDispatcher.ins.executeCommand(commandBean.cmd,commandBean.message,webView)
     }
 
     fun back(over: () -> Unit) {

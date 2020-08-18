@@ -6,19 +6,20 @@ dj.callbackname = function(){
     return "djapi_callback_" + (new Date()).getTime() + "_" + Math.floor(Math.random() * 10000);
 };
 dj.callbacks = {};
-dj.addCallback = function(name,func,userdata){
+dj.addCallback = function(name,func){
     delete dj.callbacks[name];
-    dj.callbacks[name] = {callback:func,userdata:userdata};
+    dj.callbacks[name] = {callback:func};
 };
 
-dj.callback = function(para){
-    var callbackobject = dj.callbacks[para.callbackname];
+dj.callback = function(callbackname,para){
+    var callbackobject = dj.callbacks[callbackname];
+       console.log("callBack"+callbackobject)
     if (callbackobject !== undefined){
         if (callbackobject.userdata !== undefined){
             callbackobject.userdata.callbackData = para;
         }
         if(callbackobject.callback != undefined){
-            var ret = callbackobject.callback(para,callbackobject.userdata);
+            var ret = callbackobject.callback(para,"wangyang");
             if(ret === false){
                 return
             }
@@ -41,9 +42,13 @@ dj.post = function(para){
         webview.post(JSON.stringify(para));
     }
 };
-dj.postWithCallback = function(cmd,para,callback,ud){
+dj.postWithCallback = function(para,callback){
     var callbackname = dj.callbackname();
-    dj.addCallback(callbackname,callback,ud);
+    dj.addCallback(callbackname,callback);
+    console.log(callbackname)
+    para.message.callBackName = callbackname
+    console.log(para.cmd)
+    console.log(para.message.callBackName)
     if(dj.os.isIOS){
         var message = {};
         message.meta  = {
@@ -54,7 +59,7 @@ dj.postWithCallback = function(cmd,para,callback,ud){
         window.webview.post(message);
     }else if(window.dj.os.isAndroid){
         para.callback = callbackname;
-        window.webview.post(cmd,JSON.stringify(para));
+        window.webview.post(JSON.stringify(para));
     }
 };
 dj.dispatchEvent = function(para){

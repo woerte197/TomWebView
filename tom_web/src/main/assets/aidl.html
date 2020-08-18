@@ -50,9 +50,12 @@
     }
 
     function login() {
-        dj.postWithCallback("appLogin", {type: "account"}, function(res) {
-            dj.post("showToast", {message: JSON.stringify(res)});
+        dj.postWithCallback({"cmd":"login", "message" : {"targetClass": "com.wangyang.tomwebview.LoginActivity"}}, function(res) {
+            dj.post({"cmd":"showToast", "message" : {"message": res}});
         });
+    }
+    function openPage(){
+         dj.post({"cmd":"openPage", "message" : {"targetClass": "com.wangyang.tomwebview.TestActivity"}});
     }
 </script>
 <div class="item" style="font-size: 20px; color: #ffffff" onclick="callAppToast()">调用: showToast</div>
@@ -61,6 +64,8 @@
 <div class="item" style="font-size: 20px; color: #ffffff" onclick="alertTest()">调用: alert</div>
 <div class="item" style="font-size: 20px; color: #ffffff" onclick="autoResize()">调用: 自适应屏幕</div>
 <div class="item" style="font-size: 20px; color: #ffffff" onclick="login()">调用: 登录</div>
+<div class="item" style="font-size: 20px; color: #ffffff" onclick="openPage()">打开新的页面</div>
+
 
 <script src="js/dj.js" charset="utf-8"></script>
 </body>

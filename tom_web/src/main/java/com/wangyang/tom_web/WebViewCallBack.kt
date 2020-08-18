@@ -21,7 +21,7 @@ interface WebViewCallBack {
     fun exec(
         context: Context?,
         commandBean: CommandBean,
-        webView: WebView?
+        webView: TomWebView?
     )
 
 }

@@ -6,7 +6,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
-        <activity android:name=".WebActivity"></activity>
+        <activity android:name=".WebActivity"
+             android:process=":tom"/>
+        <service android:name=".mainprocess.IMainProcessCommandService"/>
     </application>
 
 </manifest>

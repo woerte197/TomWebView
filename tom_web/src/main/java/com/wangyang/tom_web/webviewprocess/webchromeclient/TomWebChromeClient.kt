@@ -1,4 +1,4 @@
-package com.wangyang.tom_web.webViewProcess.webchromeclient
+package com.wangyang.tom_web.webviewprocess.webchromeclient
 
 import android.util.Log
 import android.webkit.ConsoleMessage

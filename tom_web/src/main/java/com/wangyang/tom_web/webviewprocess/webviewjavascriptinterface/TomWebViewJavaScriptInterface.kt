@@ -1,4 +1,4 @@
-package com.wangyang.tom_web.webViewProcess.webviewjavascriptinterface
+package com.wangyang.tom_web.webviewprocess.webviewjavascriptinterface
 
 import android.content.Context
 import android.os.Handler

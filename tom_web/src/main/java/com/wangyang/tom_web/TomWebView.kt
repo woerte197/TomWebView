@@ -4,11 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.webkit.WebView
 import com.google.gson.Gson
-import com.wangyang.tom_web.webViewProcess.webchromeclient.TomWebChromeClient
-import com.wangyang.tom_web.webViewProcess.websettings.WebViewSettings
-import com.wangyang.tom_web.webViewProcess.webviewclient.TomWebViewClient
-import com.wangyang.tom_web.webViewProcess.webviewjavascriptinterface.JavaScriptCommand
-import com.wangyang.tom_web.webViewProcess.webviewjavascriptinterface.TomWebViewJavaScriptInterface
+import com.wangyang.tom_web.webviewprocess.WebViewProcessCommandDispatcher
+import com.wangyang.tom_web.webviewprocess.webchromeclient.TomWebChromeClient
+import com.wangyang.tom_web.webviewprocess.websettings.WebViewSettings
+import com.wangyang.tom_web.webviewprocess.webviewclient.TomWebViewClient
+import com.wangyang.tom_web.webviewprocess.webviewjavascriptinterface.JavaScriptCommand
+import com.wangyang.tom_web.webviewprocess.webviewjavascriptinterface.TomWebViewJavaScriptInterface
+import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
 class TomWebView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -22,7 +24,7 @@ class TomWebView @JvmOverloads constructor(
     private fun initClient() {
         webChromeClient = TomWebChromeClient(webViewCallBack)
         webViewClient = TomWebViewClient(webViewCallBack)
-        addJavascriptInterface( TomWebViewJavaScriptInterface(context, object : JavaScriptCommand {
+        addJavascriptInterface(TomWebViewJavaScriptInterface(context, object : JavaScriptCommand {
             override fun exec(context: Context, commandBean: CommandBean) {
                 webViewCallBack?.exec(context, commandBean, this@TomWebView)
             }
@@ -33,6 +35,14 @@ class TomWebView @JvmOverloads constructor(
 
     init {
         WebViewSettings.ins.initSettings(this)
+        WebViewProcessCommandDispatcher.ins.initAidlConnection()
+    }
+
+    fun handleCallBack(callBackName: String?, response: String?) {
+        val jsCode = "javascript:dj.callback('$callBackName','$response')"
+        webView.post {
+            loadUrl(jsCode)
+        }
     }
 
     override fun loadUrl(url: String?) {

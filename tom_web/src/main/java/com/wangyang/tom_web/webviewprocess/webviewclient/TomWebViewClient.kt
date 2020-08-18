@@ -1,4 +1,4 @@
-package com.wangyang.tom_web.webViewProcess.webviewclient
+package com.wangyang.tom_web.webviewprocess.webviewclient
 
 import android.graphics.Bitmap
 import android.webkit.WebResourceError

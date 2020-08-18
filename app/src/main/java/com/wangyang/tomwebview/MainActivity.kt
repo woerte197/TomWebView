@@ -1,6 +1,7 @@
 package com.wangyang.tomwebview
 
 import android.os.Bundle
+import android.util.Log
 import com.wangyang.base.BaseActivity
 import com.wangyang.common.WebViewService
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,8 +16,13 @@ class MainActivity : BaseActivity() {
         loadUrl.setOnClickListener {
 //            val webViewServiceImpl = ServiceLoader.load(WebViewService::class.java).iterator().next()
             val webViewServiceImpl = ServiceLoader.load(WebViewService::class.java).iterator().next()
+            Log.e(Companion.TAG, "execute: "+ServiceLoader.load(WebViewService::class.java).iterator().hasNext())
             webViewServiceImpl.startWebViewActivity("https://www.baidu.com/",this)
 //            webViewServiceImpl.startWebViewActivity("https://www.baidu.com/",this)
         }
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

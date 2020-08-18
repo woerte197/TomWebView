@@ -1,4 +1,4 @@
-package com.wangyang.tom_web.webViewProcess.websettings
+package com.wangyang.tom_web.webviewprocess.websettings
 
 import android.annotation.SuppressLint
 import android.content.Context

@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/loadsir" />
             <option value="$PROJECT_DIR$/router" />
             <option value="$PROJECT_DIR$/tom_web" />
+            <option value="$PROJECT_DIR$/usercenter" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
